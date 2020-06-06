@@ -11,7 +11,6 @@ export const Container = styled.ImageBackground.attrs({
 })`
   flex: 1;
   padding: 32px;
-  background: #f0f0f5;
 `;
 
 export const Main = styled.View`

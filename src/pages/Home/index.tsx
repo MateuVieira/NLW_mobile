@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { 
   Container,
@@ -13,6 +14,11 @@ import {
   Footer } from './styles';
 
 const Home: React.FC = () => {
+  const navigation = useNavigation();
+
+  const handleNavigateToPoints = () => {
+  };
+
   return (
   <Container  >
     <Main>
@@ -21,7 +27,7 @@ const Home: React.FC = () => {
       <Description>Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente</Description>
     </Main>
     <Footer>
-      <Button onPress={() => {}} >
+      <Button onPress={handleNavigateToPoints} >
         <ButtonIconSpace>
           <ButtonIcon />
         </ButtonIconSpace>
