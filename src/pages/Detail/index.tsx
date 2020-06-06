@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 // import { SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import * as MailComposer from 'expo-mail-composer';
 import api from '../../servicies/api';
 
 import {
@@ -57,6 +58,13 @@ const Detail: React.FC = () => {
     navigation.goBack()
   };
 
+  const handleComposeMail = () => {
+    MailComposer.composeAsync({
+      subject: 'Interesse na coleta de reśiduos',
+      recipients: [data.point.email],
+    });
+  };
+
   if (!data.point) {
     return null;
   }
@@ -81,7 +89,7 @@ const Detail: React.FC = () => {
           <ButtonText>Whatsapp</ButtonText>
         </Button>
         <Button>
-          <IconMail />
+          <IconMail onPress={handleComposeMail} />
           <ButtonText>Email</ButtonText>
         </Button>
       </Footer>
