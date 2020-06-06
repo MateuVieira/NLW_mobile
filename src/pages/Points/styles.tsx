@@ -53,12 +53,12 @@ export const Map = styled(MapView).attrs(props => ({
   height: 100%;
 `;
 
-export const MapMarker = styled(Marker).attrs({
+export const MapMarker = styled(Marker).attrs(props => ({
   coordinate: {
-    latitude: -23.0216064,
-    longitude: -45.5346316,
+    latitude: props.positionPoint.latitude,
+    longitude: props.positionPoint.longitude,
   },
-})`
+}))`
   width: 90px;
   height: 80px; 
 `;

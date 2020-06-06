@@ -40,15 +40,12 @@ interface Point {
   image: string,
   latitude: number,
   longitude: number,
-  items: {
-    title: string,
-  }[];
-}
+};
 
 const Points: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
-  const [points, setPoints] = useState()
+  const [points, setPoints] = useState<Point[]>([])
 
   const [initialPosition, setInitialPosition] = useState<InicialPosition>({
     latitude: 0,
@@ -71,7 +68,7 @@ const Points: React.FC = () => {
       const { latitude, longitude } = location.coords;
 
       setInitialPosition({
-        latitude, 
+        latitude,
         longitude,
       });
     };
@@ -85,12 +82,25 @@ const Points: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    api.get('points', {
+      params: {
+        city: 'Rio do Sul',
+        uf: 'SC',
+        items: [1, 2]
+      }
+    }).then(response => {
+      setPoints(response.data);
+    });
+
+  }, []);
+
   const handleNavigationBack = () => {
     navigation.goBack()
   };
 
-  const handleNavigationToDetail = () => {
-    navigation.navigate('Detail')
+  const handleNavigationToDetail = (id: number) => {
+    navigation.navigate('Detail', {point_id: id});
   }
 
   const handleSelectItem = (id: number) => {
@@ -116,13 +126,22 @@ const Points: React.FC = () => {
         <MapContainer>
           {initialPosition.latitude !== 0 && (
             <Map initialPositionData={initialPosition} >
-            <MapMarker onPress={handleNavigationToDetail} >
-              <MapMarkerContainer>
-                <MapMarkerImage source={{ uri: 'https://ei.marketwatch.com/Multimedia/2016/11/14/Photos/ZG/MW-FA143_foodpr_20161114104830_ZG.jpg?uuid=ca5a6656-aa81-11e6-95fb-001cc448aede' }} />
-                <MapMarkerTitle>Mercado</MapMarkerTitle>
-              </MapMarkerContainer>
-            </MapMarker>
-          </Map>
+              {points.map(point => (
+                <MapMarker
+                  key={String(point.id)}
+                  onPress={() => handleNavigationToDetail(point.id)}
+                  positionPoint={{
+                    latitude: point.latitude,
+                    longitude: point.longitude,
+                  }}
+                >
+                  <MapMarkerContainer>
+                    <MapMarkerImage source={{ uri: point.image }} />
+                    <MapMarkerTitle>{point.name}</MapMarkerTitle>
+                  </MapMarkerContainer>
+                </MapMarker>
+              ))}
+            </Map>
           )}
         </MapContainer>
       </Container>
