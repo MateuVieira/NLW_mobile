@@ -9,6 +9,9 @@ import {
   PointImage,
   PointName,
   PointItems,
+  Address,
+  AddressTitle,
+  AddressContent,
 } from './styles';
 
 const Detail: React.FC = () => {
@@ -26,6 +29,10 @@ const Detail: React.FC = () => {
       <PointImage source={{ uri: 'https://ei.marketwatch.com/Multimedia/2016/11/14/Photos/ZG/MW-FA143_foodpr_20161114104830_ZG.jpg?uuid=ca5a6656-aa81-11e6-95fb-001cc448aede'}} />
       <PointName>Mercado teste</PointName>
       <PointItems>Lâmpadas, Óleo de Cozinha</PointItems>
+      <Address>
+        <AddressTitle>Endereços</AddressTitle>
+        <AddressContent>Rio do Sul, SC</AddressContent>
+      </Address>
     </Container>
   );
 }
