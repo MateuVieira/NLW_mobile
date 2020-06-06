@@ -1,5 +1,8 @@
 import styled from 'styled-components/native';
 
+import { Feather } from '@expo/vector-icons'
+import { RectButton } from 'react-native-gesture-handler';
+
 import homeBackground from '../../assets/home-background.png';
 
 export const Container = styled.ImageBackground.attrs({
@@ -46,7 +49,7 @@ export const Input = styled.View`
   font-size: 16px;
 `;
 
-export const Button = styled.View`
+export const Button = styled(RectButton)`
   background-color: #34CB79;
   height: 60px;
   flex-direction: row;
@@ -56,7 +59,7 @@ export const Button = styled.View`
   margin-top: 8px;
 `;
 
-export const ButtonIcon = styled.View`
+export const ButtonIconSpace = styled.View`
   height: 60px;
   width: 60px;
   background-color: rgba(0, 0, 0, 0.1);
@@ -64,7 +67,19 @@ export const ButtonIcon = styled.View`
   align-items: center;
 `;
 
-export const ButtonText = styled.View`
+export const ButtonIcon = styled(Feather).attrs({
+  name: 'arrow-right',
+  size: 24,
+  color: '#fff',
+})`
+  /* height: 60px;
+  width: 60px;
+  background-color: rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center; */
+`;
+
+export const ButtonText = styled.Text`
   flex: 1;
   justify-content: center;
   text-align: center;
