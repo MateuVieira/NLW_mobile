@@ -34,9 +34,21 @@ interface InicialPosition {
   longitude: number,
 };
 
+interface Point {
+  id: number,
+  name: string,
+  image: string,
+  latitude: number,
+  longitude: number,
+  items: {
+    title: string,
+  }[];
+}
+
 const Points: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [points, setPoints] = useState()
 
   const [initialPosition, setInitialPosition] = useState<InicialPosition>({
     latitude: 0,
