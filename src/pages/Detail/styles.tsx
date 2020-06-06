@@ -1,9 +1,21 @@
 import styled from 'styled-components/native';
 
+import Constants from 'expo-constants';
+import { Feather } from '@expo/vector-icons';
+
 export const Container = styled.View`
   flex: 1;
-  padding: 20px 32px 0;
+  padding: 0 32px;
+  padding-top: ${`${20 + Constants.statusBarHeight}px`};
 `;
+
+export const GoBack = styled.TouchableOpacity``;
+
+export const  GoBackIcon = styled(Feather).attrs({
+  name: 'arrow-left',
+  size: 20,
+  color: '#34cb79',
+})``;
 
 export const  PointImage = styled.Image.attrs({
   resizeMode: 'cover',

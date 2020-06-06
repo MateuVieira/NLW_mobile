@@ -1,10 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
+// import { View } from 'react-native';
 
-// import { Container } from './styles';
+import { Container, GoBack, GoBackIcon, } from './styles';
 
 const Detail: React.FC = () => {
-  return <View />;
+  return (
+    <Container>
+      <GoBack>
+        <GoBackIcon />
+      </GoBack>
+    </Container>
+  );
 }
 
 export default Detail;
