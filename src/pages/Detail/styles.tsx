@@ -5,10 +5,13 @@ import Constants from 'expo-constants';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
 
+export const SafeArea = styled.SafeAreaView`
+  flex: 1;
+`;
+
 export const Container = styled.View`
   flex: 1;
-  padding: 0 32px;
-  padding-top: ${`${20 + Constants.statusBarHeight}px`};
+  padding: 20px 32px 0;
 `;
 
 export const GoBack = styled.TouchableOpacity``;
