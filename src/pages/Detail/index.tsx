@@ -12,6 +12,11 @@ import {
   Address,
   AddressTitle,
   AddressContent,
+  Footer,
+  Button,
+  IconWhatsapp,
+  IconMail,
+  ButtonText,
 } from './styles';
 
 const Detail: React.FC = () => {
@@ -22,6 +27,7 @@ const Detail: React.FC = () => {
   };
 
   return (
+    <>
     <Container>
       <GoBack onPress={handleNavigationBack} >
         <GoBackIcon />
@@ -34,6 +40,17 @@ const Detail: React.FC = () => {
         <AddressContent>Rio do Sul, SC</AddressContent>
       </Address>
     </Container>
+    <Footer>
+      <Button>
+        <IconWhatsapp />
+        <ButtonText>Whatsapp</ButtonText>
+      </Button>
+      <Button>
+        <IconMail />
+        <ButtonText>Email</ButtonText>
+      </Button>
+    </Footer>
+    </>
   );
 }
 

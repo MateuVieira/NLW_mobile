@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 
+import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
-import { Feather } from '@expo/vector-icons';
+import { Feather, FontAwesome } from '@expo/vector-icons';
+import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
@@ -60,14 +62,14 @@ export const  AddressContent = styled.Text`
 `;
 
 export const  Footer = styled.View`
-  /* borderTopWidth: StyleSheet.hairlineWidth; */
+  border-top-width: ${`${StyleSheet.hairlineWidth}px`};
   border-color: #999;
   padding: 20px 32px;
   flex-direction: row;
   justify-content: space-between;
 `;
     
-export const  Button = styled.View`
+export const  Button = styled(RectButton)`
   width: 48%;
   background-color: #34CB79;
   border-radius: 10px;
@@ -76,6 +78,18 @@ export const  Button = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const IconWhatsapp = styled(FontAwesome).attrs({
+  name: 'whatsapp',
+  size: 20,
+  color: '#fff',
+})``;
+
+export const IconMail = styled(Feather).attrs({
+  name: 'mail',
+  size: 20,
+  color: '#fff',
+})``;
 
 export const  ButtonText = styled.Text`
   margin-left: 8px;
