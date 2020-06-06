@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
 
   const handleNavigateToPoints = () => {
+    navigation.navigate('Points');
   };
 
   return (
