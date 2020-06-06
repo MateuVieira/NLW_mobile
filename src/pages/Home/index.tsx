@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,10 +17,13 @@ import {
 } from './styles';
 
 const Home: React.FC = () => {
+  const [uf, setUf] = useState('');
+  const [city, setCity] = useState('');
+
   const navigation = useNavigation();
 
   const handleNavigateToPoints = () => {
-    navigation.navigate('Points');
+    navigation.navigate('Points', {uf, city});
   };
 
   return (
@@ -38,9 +41,17 @@ const Home: React.FC = () => {
         <Footer>
           <Input
             placeholder="Digite a UF"
+            value={uf}
+            onChangeText={setUf}
+            maxLength={2}
+            autoCapitalize="characters"
+            autoCorrect={false}
           />
           <Input
             placeholder="Digite a cidade"
+            value={city}
+            onChangeText={setCity}
+            autoCorrect={false}
           />
           <Button onPress={handleNavigateToPoints} >
             <ButtonIconSpace>
