@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from '../../servicies/api';
 
 import {
   Container,
@@ -21,8 +22,23 @@ import {
   ItemTitle,
 } from './styles';
 
+interface Item {
+  id: number;
+  title: string,
+  image_url: string,
+};
+
+import api from '../../servicies/api';
+
 const Points: React.FC = () => {
+  const [items, setItems] = useState<Item[]>([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    api.get('items').then(response => {
+      setItems(response.data);
+    });
+  }, []);
 
   const handleNavigationBack = () => {
     navigation.goBack()
@@ -44,8 +60,8 @@ const Points: React.FC = () => {
           <Map>
             <MapMarker onPress={handleNavigationToDetail} >
               <MapMarkerContainer>
-              <MapMarkerImage source={{uri: 'https://ei.marketwatch.com/Multimedia/2016/11/14/Photos/ZG/MW-FA143_foodpr_20161114104830_ZG.jpg?uuid=ca5a6656-aa81-11e6-95fb-001cc448aede'}} />
-              <MapMarkerTitle>Mercado</MapMarkerTitle>
+                <MapMarkerImage source={{ uri: 'https://ei.marketwatch.com/Multimedia/2016/11/14/Photos/ZG/MW-FA143_foodpr_20161114104830_ZG.jpg?uuid=ca5a6656-aa81-11e6-95fb-001cc448aede' }} />
+                <MapMarkerTitle>Mercado</MapMarkerTitle>
               </MapMarkerContainer>
             </MapMarker>
           </Map>
@@ -53,30 +69,12 @@ const Points: React.FC = () => {
       </Container>
       <ItemsContainer>
         <ItemsScroll>
-          <Item>
-            <ItemImage imageUrl={'https://weboverhauls.github.io/demos/svg/checkmark.svg'} />
-            <ItemTitle>TEste</ItemTitle>
-          </Item>
-          <Item>
-            <ItemImage imageUrl={'https://weboverhauls.github.io/demos/svg/checkmark.svg'} />
-            <ItemTitle>TEste</ItemTitle>
-          </Item>
-          <Item>
-            <ItemImage imageUrl={'https://weboverhauls.github.io/demos/svg/checkmark.svg'} />
-            <ItemTitle>TEste</ItemTitle>
-          </Item>
-          <Item>
-            <ItemImage imageUrl={'https://weboverhauls.github.io/demos/svg/checkmark.svg'} />
-            <ItemTitle>TEste</ItemTitle>
-          </Item>
-          <Item>
-            <ItemImage imageUrl={'https://weboverhauls.github.io/demos/svg/checkmark.svg'} />
-            <ItemTitle>TEste</ItemTitle>
-          </Item>
-          <Item>
-            <ItemImage imageUrl={'https://weboverhauls.github.io/demos/svg/checkmark.svg'} />
-            <ItemTitle>TEste</ItemTitle>
-          </Item>
+          {items.map(item => (
+            <Item key={item.id} >
+              <ItemImage imageUrl={item.image_url} />
+              <ItemTitle>{item.title}</ItemTitle>
+            </Item>
+          ))}
         </ItemsScroll>
       </ItemsContainer>
     </>
