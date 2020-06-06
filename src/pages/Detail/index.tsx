@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 // import { SafeAreaView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import api from '../../servicies/api';
 
 import {
   SafeArea,
@@ -24,15 +25,41 @@ interface Params {
   point_id: number,
 };
 
+interface Data {
+  point: {
+    image: string,
+    name: string,
+    email: string,
+    whatsapp: string,
+    city: string,
+    uf: string,
+  };
+  items: {
+    title: string,
+  }[];
+}
+
 const Detail: React.FC = () => {
+  const [data, setData] = useState<Data>({} as Data);
+
   const navigation = useNavigation();
   const route = useRoute();
 
   const routeParams = route.params as Params;
 
+  useEffect(() => {
+    api.get(`points/${routeParams.point_id}`).then(response => {
+      setData(response.data);
+    });
+  }, []);
+
   const handleNavigationBack = () => {
     navigation.goBack()
   };
+
+  if (!data.point) {
+    return null;
+  }
 
   return (
     <SafeArea>
@@ -40,12 +67,12 @@ const Detail: React.FC = () => {
         <GoBack onPress={handleNavigationBack} >
           <GoBackIcon />
         </GoBack>
-        <PointImage source={{ uri: 'https://ei.marketwatch.com/Multimedia/2016/11/14/Photos/ZG/MW-FA143_foodpr_20161114104830_ZG.jpg?uuid=ca5a6656-aa81-11e6-95fb-001cc448aede' }} />
-        <PointName>Mercado teste</PointName>
-        <PointItems>Lâmpadas, Óleo de Cozinha</PointItems>
+        <PointImage source={{ uri: data.point.image}} />
+        <PointName>{data.point.name}</PointName>
+  <PointItems>{data.items.map(item => item.title).join(', ')}</PointItems>
         <Address>
           <AddressTitle>Endereços</AddressTitle>
-          <AddressContent>Rio do Sul, SC</AddressContent>
+          <AddressContent>{`${data.point.city}, ${data.point.uf}`}</AddressContent>
         </Address>
       </Container>
       <Footer>
