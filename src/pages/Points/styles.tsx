@@ -41,14 +41,14 @@ export const MapContainer = styled.View`
   margin-top: 16px;
 `;
 
-export const Map = styled(MapView).attrs({
+export const Map = styled(MapView).attrs(props => ({
   initialRegion: {
-    latitude: -23.0216064,
-    longitude: -45.5346316,
+    latitude: props.initialPositionData.latitude,
+    longitude: props.initialPositionData.longitude,
     latitudeDelta: 0.014,
     longitudeDelta: 0.014,
   },
-})`
+}))`
   width: 100%;
   height: 100%;
 `;
