@@ -5,7 +5,11 @@ import { RectButton } from 'react-native-gesture-handler';
 
 import homeBackground from '../../assets/home-background.png';
 
-export const Container = styled.ImageBackground.attrs({
+export const Container = styled.KeyboardAvoidingView`
+  flex: 1;
+`;
+
+export const Body = styled.ImageBackground.attrs({
   source: homeBackground,
   imageStyle: {width: 274, height: 268},
 })`
@@ -39,12 +43,12 @@ export const Footer = styled.View``;
 
 export const Select = styled.View``;
 
-export const Input = styled.View`
+export const Input = styled.TextInput`
   height: 60px;
   background-color: #FFF;
   border-radius: 10px;
   margin-bottom: 8px;
-  /* padding-horizontal: 24; */
+  padding: 0 24px;
   font-size: 16px;
 `;
 
@@ -70,13 +74,7 @@ export const ButtonIcon = styled(Feather).attrs({
   name: 'arrow-right',
   size: 24,
   color: '#fff',
-})`
-  /* height: 60px;
-  width: 60px;
-  background-color: rgba(0, 0, 0, 0.1);
-  justify-content: center;
-  align-items: center; */
-`;
+})``;
 
 export const ButtonText = styled.Text`
   flex: 1;
