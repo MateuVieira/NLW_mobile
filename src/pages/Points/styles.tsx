@@ -99,7 +99,9 @@ export const ItemsScroll = styled.ScrollView.attrs({
   contentContainerStyle: {paddingHorizontal: 20},
 })``;
 
-export const Item = styled.TouchableOpacity`
+export const Item = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.6,
+})`
   background-color: #fff;
   border-width: 2px;
   border-color: #eee;
@@ -110,8 +112,10 @@ export const Item = styled.TouchableOpacity`
   margin-right: 8px;
   align-items: center;
   justify-content: space-between;
-
   text-align: center;
+
+  border-color: #34CB79;
+  border-width: ${props => props.statusSelectItem ? '2px' : '0px'};
 `;
 
 export const ItemImage = styled(SvgUri).attrs(props => ({

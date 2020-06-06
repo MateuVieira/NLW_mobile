@@ -32,6 +32,7 @@ import api from '../../servicies/api';
 
 const Points: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -47,6 +48,18 @@ const Points: React.FC = () => {
   const handleNavigationToDetail = () => {
     navigation.navigate('Detail')
   }
+
+  const handleSelectItem = (id: number) => {
+    const alreadySelectd = selectedItems.findIndex(item => item === id);
+
+    if(alreadySelectd >= 0 ) {
+      const filteredItems = selectedItems.filter(item => item !== id);
+
+      setSelectedItems(filteredItems);
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
+  };
 
   return (
     <>
@@ -70,7 +83,11 @@ const Points: React.FC = () => {
       <ItemsContainer>
         <ItemsScroll>
           {items.map(item => (
-            <Item key={item.id} >
+            <Item 
+              key={item.id} 
+              onPress={() => handleSelectItem(item.id)} 
+              statusSelectItem={selectedItems.includes(item.id)}  
+            >
               <ItemImage imageUrl={item.image_url} />
               <ItemTitle>{item.title}</ItemTitle>
             </Item>
