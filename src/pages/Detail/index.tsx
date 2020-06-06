@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-// import { SafeAreaView } from 'react-native';
+import { Linking } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as MailComposer from 'expo-mail-composer';
 import api from '../../servicies/api';
@@ -65,6 +65,10 @@ const Detail: React.FC = () => {
     });
   };
 
+  const handleWhatsapp = () => {
+    Linking.openURL(`whatsapp://send?phone=${data.point.whatsapp}&text=Tenho interesse sobre coleta de resíduos.`);
+  };
+
   if (!data.point) {
     return null;
   }
@@ -84,12 +88,12 @@ const Detail: React.FC = () => {
         </Address>
       </Container>
       <Footer>
-        <Button>
+        <Button onPress={handleWhatsapp} >
           <IconWhatsapp />
           <ButtonText>Whatsapp</ButtonText>
         </Button>
-        <Button>
-          <IconMail onPress={handleComposeMail} />
+        <Button onPress={handleComposeMail}  >
+          <IconMail />
           <ButtonText>Email</ButtonText>
         </Button>
       </Footer>
